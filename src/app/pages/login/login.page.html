@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ionic Forms</ion-title>
+  </ion-toolbar>
+  Tomado de: <br> https://www.positronx.io/ionic-form-validation-tutorial/
+  <br>
+  https://ionicthemes.com/tutorials/forms-and-validation-in-ionic
+  <br>
+  https://github.com/ionicthemes/ionic-forms-and-validations/tree/master/src/app
+<br>
+https://www.freakyjolly.com/ionic-multiple-checkbox-validation-using-formcontrol/
+<br>
+https://angular-templates.io/tutorials/about/angular-forms-and-validations
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <span class="error-message ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+      Name is required.
+    </span>
+    <span class="error-message ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.minlength">
+      Name should be min 2 chars long.
+    </span>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <span class="error-message ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      Email is required.
+    </span>
+    <span class="error-message ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+      Please provide valid email id.
+    </span>
+
+    <ion-item lines="full">
+      <ion-label position="floating">DOB</ion-label>
+      <ion-datetime (ionChange)="getDate($event)" formControlName="dob" [value]="defaultDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Mobile</ion-label>
+      <ion-input maxlength="10" formControlName="mobile" type="text" required></ion-input>
+    </ion-item>
+    <span class="error-message ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.required">
+      Mobile number is required.
+    </span>
+    <span class="error-message ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.pattern">
+      Only numerical values allowed.
+    </span>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Gender</ion-label>
+      <ion-select formControlName="gender" cancelText="Cancel" okText="OK">
+        <ion-select-option *ngFor="let gender of genders" [value]="gender">{{gender}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Forma de Pago</ion-label>
+      <ion-select formControlName="paymentOptions" cancelText="Cancel" okText="OK">
+        <ion-select-option *ngFor="let item of RADIO_LIST; let i=index" [value]="item.value">{{item.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  <!-- <div *ngFor="let item of RADIO_LIST; let i=index">
+    <label>{{item.name}}</label>
+    <input type="radio" [value]="item.value" [checked]="item.checked" formControlName="paymentOptions" />
+  </div> -->
+
+  <span class="error-msg" *ngIf="isSubmitted && ionicForm.controls['paymentOptions'].errors?.required">
+    Please select any option above!
+  </span>
+
+
+    <ion-list>
+      <ion-item *ngFor="let item of CHECK_LIST; let i=index">
+
+        <ion-label>{{item.name}}</ion-label>
+        <ion-checkbox slot="end" [value]="item.value" [checked]="item.checked"
+          (ionChange)="onSelectionChange($event,i)">
+        </ion-checkbox>
+
+      </ion-item>
+</ion-list>
+{{CHECK_LIST | json}}
+
+
+    <ion-row>
+      <ion-col>
+        <ion-button class="submit-btn" type="submit" color="danger" expand="block" [disabled]="!ionicForm.valid">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -1,0 +1,39 @@
+.hero {
+    background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 40vh;
+    width: 100%;
+}
+
+[ion-fixed] {
+    min-height: calc(100% - 98px); // adjust to your footer height!
+}
+
+.pie-pagina {
+    //   background: var(--ion-color-dark);
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // color: var(--ion-color-primary-contrast);
+    /* Shipment ID: 10565 */
+
+
+    // background: var(--ion-color-dark);
+    background: var(--ion-color-danger);
+    /* H1 / Roboto Light */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 120%;
+    /* identical to box height, or 31px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Yellow */
+    color: #F2C94C;
+
+}
